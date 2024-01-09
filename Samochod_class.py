@@ -1,5 +1,5 @@
 class Samochod:
-    def __init__(self, rocz, marka, przeb, st, ils, skrz, pojemn, rodz, data, adn, czyd, opltd):
+    def __init__(self, marka, rocz, przeb, st, ils, skrz, pojemn, rodz, data, adn, czyd, opltd):
         self.rocznik = rocz
         self.marka =marka
         self.przbieg = przeb
