@@ -1,5 +1,6 @@
 from Osoba_class import Osoba
 from Samochod_class import Samochod
+#from BazaWypozyczenia_class import BazaWypozyczenia
 
 class Klient(Osoba):
     def __init__(self, im, nazw, pes, pl, log, status):
@@ -23,3 +24,17 @@ class Klient(Osoba):
         print("PESEL: ", self.pesel)
         print("Plec: ", self.plec)
         print("Login: ", self.login)
+
+
+  #  def sprawdz_status_stalego_klienta(self, baza_wypozyczen : BazaWypozyczenia):
+  #      policz_ile_transakcji = 0
+  #      for i in baza_wypozyczen.historia_wypozyczen_w_bazie:
+  #          if i.klient_ktory_wypozyczyl.login == self.login:
+  #              policz_ile_transakcji += 1
+
+   #     if policz_ile_transakcji >= 10:
+  #          print("Klient posiada status stalego klienta - posiada dodatkowa znizke na wypozyczenie")
+   #         self.status_stalego_klienta = 1
+   #    else:
+    #        print("Za malo transakcji do statusu stalego klienta!")
+     #       print("Brakujaca ilosc transakcji to: ", 10-policz_ile_transakcji)

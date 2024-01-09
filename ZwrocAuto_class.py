@@ -3,6 +3,7 @@ from Samochod_class import Samochod
 from Klient_class import Klient
 from WypozyczAuto_class import WypozyczAuto
 from BazaWypozyczenia_class import BazaWypozyczenia
+from Zaplata_class import Zaplata
 
 
 class ZwrocAuto:
@@ -20,7 +21,7 @@ class ZwrocAuto:
                 baza_wypozyczen.wypozyczenie_aktualizacja(wypozyczenie)
                 ilosc_dni = wypozyczenie.data_oddania - wypozyczenie.data_wypozyczenia
                 print("Operacja zwrotu samochodu przebiegla pomyslnie, przejscie do procedury zaplaty.")
-                
-
+                oplac_wypozyczenie = Zaplata(samochod, klient, baza_wypozyczen, ilosc_dni)
+                oplac_wypozyczenie.wybierz_metode_platnosci()
             except:
-                print("Błąd! Nieprawidłowy format daty.")
+                print("Blad! Nieprawidlowy format daty.")

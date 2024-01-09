@@ -1,7 +1,7 @@
 from datetime import datetime
 from Klient_class import Klient
 from Samochod_class import Samochod
-from BazaWypozyczenia_class import BazaWypozyczenia
+#from BazaWypozyczenia_class import BazaWypozyczenia
 
 class WypozyczAuto:
     licznik = 10000
@@ -14,7 +14,7 @@ class WypozyczAuto:
         self.data_wypozyczenia
         self.data_oddania = "Brak"
 
-    def wypozycz(self, klient :Klient, autoa : Samochod, rejestr_wypozyczen : BazaWypozyczenia):
+    def wypozycz(self, klient :Klient, autoa : Samochod, rejestr_wypozyczen):
         if autoa.czy_dostepne_do_wypozyczenia == 1:
             self.klient_ktory_wypozyczyl = klient
             self.wypozyczony_samochod = autoa

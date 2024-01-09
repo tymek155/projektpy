@@ -7,6 +7,10 @@ class Zaplata:
         self.kwota = wypozyczony_samochod.oplata_dzienna * ilosc_dni
         self.metoda_platnosci = "Brak"
         print("Sprawdzam czy klient posiada status stalego klienta.")
+        uczestnik_transakcji.sprawdz_status_stalego_klienta(baza_wypozyczen)
+        if uczestnik_transakcji.status_stalego_klienta == 1:
+            print("Transakcja zostanie zrealizowana z obnizka dla stalego klienta")
+            self.kwota = 0.9*self.kwota
 
     def wybierz_metode_platnosci(self):
         print("Wybierz metode platnosci za wypozcyzenie: ")

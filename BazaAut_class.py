@@ -30,3 +30,17 @@ class BazaAut:
             self.dostepne_marki.add(marka)
             BazaAut.ilosc_marek += 1
 
+    def usun_samochod(self, samochod : Samochod):
+        index = 0
+        for i in self.samochody_w_bazie:
+            if i == samochod:
+                print("Znaleziono samochod do usuniecia!")
+                del self.samochody_w_bazie[index]
+                BazaAut.ilosc_aut_w_bazie = BazaAut.ilosc_aut_w_bazie - 1
+                break
+            index = index + 1
+        else:
+            print("Nie znaleziono samochodu do usuniecia!")
+
+    
+
