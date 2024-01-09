@@ -27,12 +27,11 @@ class WypozyczAuto:
         else:
             print("Auto ktore chcesz wypozyczyc jest niedostepne.")
 
-    def pokaz_informacje_wypozyczenie(self, wypozyczony_samochod : Samochod):
+    def pokaz_informacje_wypozyczenie(self):
         print("Numer ID wypozyczenia: ", self.id_wypozyczenia)
         print("Data wypozyczenia: ", self.data_wypozyczenia)
         print("Data oddania: ", self.data_oddania)
-        #?
-        wypozyczony_samochod.podaj_info_do_dok_wypozyczenia()
+        self.wypozyczony_samochod.podaj_info_do_dok_wypozyczenia()
 
 
 
