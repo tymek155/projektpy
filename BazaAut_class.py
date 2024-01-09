@@ -42,5 +42,10 @@ class BazaAut:
         else:
             print("Nie znaleziono samochodu do usuniecia!")
 
+    def wyswietl_baze_aut(self):
+        for i in self.samochody_w_bazie:
+            i.podaje_cale_info_samochod(i)
+            print("\n")
+
     
 
