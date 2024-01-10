@@ -14,3 +14,7 @@ class BazaKlientow:
         for i in self.klienci_w_bazie:
             if i.login == log:
                 return i
+    
+    def wyswietl_baze_klientow(self):
+        for i in self.klienci_w_bazie:
+            i.wyswietl_informacje_o_kliencie()

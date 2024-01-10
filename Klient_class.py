@@ -24,6 +24,7 @@ class Klient(Osoba):
         print("PESEL: ", self.pesel)
         print("Plec: ", self.plec)
         print("Login: ", self.login)
+        print("\n")
 
     def dodaj_klienta_input(self):
         self.imie = input("Podaj imie: ")

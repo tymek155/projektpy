@@ -46,7 +46,7 @@ class Samochod:
         print("Marka: ", self.marka)
         print("Rodzaj samochodu: ", self.rodzaj)
         print("Rocznik produkcji: ", self.rocznik)
-        print("Przebieg: ", self.przebieg)
+        print("Przebieg: ", self.przbieg)
         print("Ilosc miejsc: ", self.ilosc_siedzen)
         print("Skryznia biegow: ", self.skrzynia_biegow)
         print("Pojemnosc bagaznika: ", self.pojemnosc_bagaznika)

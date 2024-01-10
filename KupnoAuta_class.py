@@ -3,7 +3,7 @@ from BazaAut_class import BazaAut
 
 class KupnoAuta:
     def __init__(self):
-        self.czy_operacja_udana
+        self.czy_operacja_udana = None
 
     def kupno(self, samochod : Samochod, baza_aut : BazaAut):
         baza_aut.dodaj(samochod)

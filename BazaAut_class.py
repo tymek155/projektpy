@@ -44,7 +44,7 @@ class BazaAut:
 
     def wyswietl_baze_aut(self):
         for i in self.samochody_w_bazie:
-            i.podaje_cale_info_samochod(i)
+            i.podaje_cale_info_samochod()
             print("\n")
 
     
