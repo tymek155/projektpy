@@ -10,7 +10,7 @@ class ZwrocAuto:
     def __init__(self):
         self.czy_operacja_udana = None
 
-    def zwroc_auto(samochod : Samochod, klient : Klient, wypozyczenie : WypozyczAuto, baza_wypozyczen: BazaWypozyczenia):
+    def zwroc_auto(self, samochod : Samochod, klient : Klient, wypozyczenie : WypozyczAuto, baza_wypozyczen: BazaWypozyczenia):
         if (samochod.czy_dostepne_do_wypozyczenia == 0):
             samochod.czy_dostepne_do_wypozyczenia = 1
             podaj_date = input("Podaj date w formacie YYYY-MM-DD: ")
@@ -21,7 +21,8 @@ class ZwrocAuto:
                 baza_wypozyczen.wypozyczenie_aktualizacja(wypozyczenie)
                 ilosc_dni = wypozyczenie.data_oddania - wypozyczenie.data_wypozyczenia
                 print("Operacja zwrotu samochodu przebiegla pomyslnie, przejscie do procedury zaplaty.")
+                self.czy_operacja_udana = 1
                 oplac_wypozyczenie = Zaplata(samochod, klient, baza_wypozyczen, ilosc_dni)
-                oplac_wypozyczenie.wybierz_metode_platnosci()
+                oplac_wypozyczenie.wybierz_metode_platnosci(samochod)
             except:
                 print("Blad! Nieprawidlowy format daty.")

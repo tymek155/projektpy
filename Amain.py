@@ -74,9 +74,10 @@ def main():
             klient = Klient(None, None, None, None, None, None)
             klient = baza_klientow.znajdz_klienta_w_bazie(log)
             wypozyczenie = WypozyczAuto()
-            wypozyczenie = baza_wypozyczen.znajdz_wypozyczenie_w_bazie(klient.log)
+            wypozyczenie = baza_wypozyczen.znajdz_wypozyczenie_w_bazie(klient.login)
             wypozyczenie = baza_wypozyczen.wybierz_wypozyczenia(wypozyczenie)
             zwrot_auta = ZwrocAuto() 
+            #zwrot_auta.zwroc_auto(wypozyczenie.wypozyczony_samochod, klient, wypozyczenie, baza_wypozyczen)
             zwrot_auta.zwroc_auto(wypozyczenie.wypozyczony_samochod, klient, wypozyczenie, baza_wypozyczen)
         elif wybor == 11:
             zloz_reklmacje = ZlozReklamacje()
