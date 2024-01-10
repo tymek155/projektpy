@@ -14,15 +14,15 @@ class ZwrocAuto:
         if (samochod.czy_dostepne_do_wypozyczenia == 0):
             samochod.czy_dostepne_do_wypozyczenia = 1
             podaj_date = input("Podaj date w formacie YYYY-MM-DD: ")
-            try:
-                wprowadzona_data = datetime.strptime(podaj_date, "%Y-%m-%d")
-                print("Wprowadzona data: ", wprowadzona_data)
-                wypozyczenie.data_oddania = wprowadzona_data
-                baza_wypozyczen.wypozyczenie_aktualizacja(wypozyczenie)
-                ilosc_dni = wypozyczenie.data_oddania - wypozyczenie.data_wypozyczenia
-                print("Operacja zwrotu samochodu przebiegla pomyslnie, przejscie do procedury zaplaty.")
-                self.czy_operacja_udana = 1
-                oplac_wypozyczenie = Zaplata(samochod, klient, baza_wypozyczen, ilosc_dni)
-                oplac_wypozyczenie.wybierz_metode_platnosci(samochod)
-            except:
-                print("Blad! Nieprawidlowy format daty.")
+            #try:
+            wprowadzona_data = datetime.strptime(podaj_date, "%Y-%m-%d")
+            print("Wprowadzona data: ", wprowadzona_data)
+            wypozyczenie.data_oddania = wprowadzona_data
+            baza_wypozyczen.wypozyczenie_aktualizacja(wypozyczenie)
+            ilosc_dni = (wypozyczenie.data_oddania - wypozyczenie.data_wypozyczenia).days
+            print("Operacja zwrotu samochodu przebiegla pomyslnie, przejscie do procedury zaplaty.")
+            self.czy_operacja_udana = 1
+            oplac_wypozyczenie = Zaplata(samochod, klient, baza_wypozyczen, ilosc_dni)
+            oplac_wypozyczenie.wybierz_metode_platnosci(samochod)
+           # except:
+            #    print("Blad! Nieprawidlowy format daty.")
