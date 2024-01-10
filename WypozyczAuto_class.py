@@ -7,11 +7,11 @@ class WypozyczAuto:
     licznik = 10000
     
     def __init__(self):
-        self.czy_operacja_udana
-        self.id_wypozyczenia
-        self.klient_ktory_wypozyczyl
-        self.wypozyczony_samochod
-        self.data_wypozyczenia
+        self.czy_operacja_udana = None
+        self.id_wypozyczenia = None
+        self.klient_ktory_wypozyczyl = None
+        self.wypozyczony_samochod = None
+        self.data_wypozyczenia = None
         self.data_oddania = "Brak"
 
     def wypozycz(self, klient :Klient, autoa : Samochod, rejestr_wypozyczen):

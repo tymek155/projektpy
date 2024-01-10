@@ -43,9 +43,17 @@ class BazaAut:
             print("Nie znaleziono samochodu do usuniecia!")
 
     def wyswietl_baze_aut(self):
+        licznik = 0
         for i in self.samochody_w_bazie:
+            print("Samochod nr: ", licznik+1)
             i.podaje_cale_info_samochod()
             print("\n")
+            licznik = licznik + 1
 
+    def wybierz_auto(self):
+        self.wyswietl_baze_aut()
+        wybor = int(input("Podaj numer samochodu na ktorym chcesz dokonac operacji: "))
+        wybor = wybor - 1
+        return self.samochody_w_bazie[wybor]
     
 

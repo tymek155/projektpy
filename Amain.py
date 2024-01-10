@@ -1,5 +1,6 @@
 from Samochod_class import Samochod
 from KupnoAuta_class import KupnoAuta
+from WypozyczAuto_class import WypozyczAuto
 from Klient_class import Klient
 from OperacjeAuto_class import OperacjeAuto
 from BazaAut_class import BazaAut
@@ -21,6 +22,7 @@ def main():
         print("3. Dodaj klienta do bazy klientow")
         print("4. Wyswietl klientow znajdujacych sie w bazie")
         print("5. Wykonaj badanie techniczne samochodu")
+        print("6. Wypozycz samochod")
 
         wybor = int(input())
         if wybor == 1:
@@ -38,6 +40,11 @@ def main():
             baza_klientow.wyswietl_baze_klientow()
         elif wybor == 5:
             operacja_badanie = OperacjeAuto()
-            operacja_badanie.badanie_techniczne()
+            operacja_badanie.badanie_techniczne(baza_aut.wybierz_auto(), baza_aut)
+        elif wybor == 6:
+            wypozyczenie = WypozyczAuto()
+            klient = Klient(None, None, None, None, None, None)
+            log = input("Podaj login dla ktorego chcesz dokonac wypozyczenia: ")
+            wypozyczenie.wypozycz()
 
 main()

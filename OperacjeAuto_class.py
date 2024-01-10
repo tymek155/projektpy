@@ -4,8 +4,8 @@ from BazaAut_class import BazaAut
 
 class OperacjeAuto:
     def __init__(self):
-        self.czy_naprawa_udana
-        self.czy_kasacja_wykonana
+        self.czy_naprawa_udana = None
+        self.czy_kasacja_wykonana = None
 
     def kasacja(self, samochod : Samochod, baza_aut : BazaAut):
         if self.czy_kasacja_wykonana == 1:
@@ -13,9 +13,9 @@ class OperacjeAuto:
             baza_aut.usun_samochod(samochod)
 
     def naprawa_auta(self, samochod : Samochod, baza_aut : BazaAut):
-        decyzja_naprawy = int(input("Czy naprawa samochodu jest mozliwa? Podaj 1 jesli TAK, 0 jesli NIE"))
+        decyzja_naprawy = int(input("Czy naprawa samochodu jest mozliwa? Podaj 1 jesli TAK, 0 jesli NIE" ))
         while (decyzja_naprawy == 0):
-            decyzja_ostateczna = int(input("Czy chcesz usunac auto z bazy i przekazac jes do kasacji? Podaj 1 jesli TAK, 0 jesli NIE"))
+            decyzja_ostateczna = int(input("Czy chcesz usunac auto z bazy i przekazac jes do kasacji? Podaj 1 jesli TAK, 0 jesli NIE "))
             if decyzja_ostateczna == 1:
                 print("Auto zostaje przekazane do kasacji i trwale usuniete z bazy")
                 self.czy_kasacja_wykonana = 1
@@ -28,6 +28,12 @@ class OperacjeAuto:
             notatka = input("Opisz naprawe, wymienione czesci oraz koszt naprawy samochodu: ")
             samochod.adnotacja_naprawa = samochod.adnotacja_naprawa + notatka
             self.czy_naprawa_udana = 1
+            podaj_date = input("Podaj datę nastepnego badania technicznego w formacie YYYY-MM-DD: ")
+            try:
+                samochod.data_badania_technicznego = datetime.strptime(podaj_date, "%Y-%m-%d")
+                print("Data nastepnego badania technicznego:", samochod.data_badania_technicznego)    
+            except ValueError:
+                print("Blad! Nieprawidlowy format daty.")
 
     def badanie_techniczne(self, samochod: Samochod, baza_aut : BazaAut):
         sprawdzam_stan_samochodu = []
@@ -50,7 +56,7 @@ class OperacjeAuto:
         podaj_date = input("Podaj datę nastepnego badania technicznego w formacie YYYY-MM-DD: ")
         try:
             samochod.data_badania_technicznego = datetime.strptime(podaj_date, "%Y-%m-%d")
-            print("Data nastepnego badania technicznego:", samochod.data_badania_technicznego)    
+            print("Data nastepnego badania technicznego: ", samochod.data_badania_technicznego)    
         except ValueError:
             print("Blad! Nieprawidlowy format daty.")
 
