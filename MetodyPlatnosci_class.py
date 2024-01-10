@@ -11,7 +11,7 @@ class MetodyPlatnosci:
             if self.metoda_platnosci=="Gotowka":
                 print("Wybrano Płatność gotówką\n")
                 from PlatnoscGotowka_class import PlatnoscGotowka
-                platnosc=PlatnoscGotowka(self.prize)
+                platnosc=PlatnoscGotowka(self.prize, self.metoda_platnosci)
                 platnosc.zaplac_gotowka(samochod)
             else:
                 print("Wybrano Płatności bankowe\n-----Przekierowuję na stronę banku------\n")

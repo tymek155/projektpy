@@ -24,10 +24,10 @@ class ZlozReklamacje:
 
     def uzuplenij_info(self, baza_klientow: BazaKlientow, baza_wypozyczen : BazaWypozyczenia, baza_reklamacji : BazaReklamacji):
         log = input("Podaj login klienta, dla ktorego chcesz wprowadzic reklamaccje: ")
-        klient_wypozyczajacy = Klient()
+        klient_wypozyczajacy = Klient(None, None, None, None, None, None)
         klient_wypozyczajacy = baza_klientow.znajdz_klienta_w_bazie(log)
         if (klient_wypozyczajacy.login == log):
-            nowa_reklamacja = Reklamacja()
+            nowa_reklamacja = Reklamacja(None, None, None, None)
             nowa_reklamacja.dane_reklamujacego = klient_wypozyczajacy
             print("Znajdz wypozyczenie, ktorego dotyczy reklamacja")
             historia_wypozyczen = baza_wypozyczen.znajdz_wypozyczenie_w_bazie(klient_wypozyczajacy.login)
@@ -43,6 +43,7 @@ class ZlozReklamacje:
                         spr =1 
                         print("Podano prawidlowe ID wypozyczenia!")
                         nowa_reklamacja.wypozyczenie_reklamowane = i
+                        nowa_reklamacja.dane_pojazdu = i.wypozyczony_samochod
                         break
                 
                 print("Podano nieprawidlowe ID wypozyczenia, podaj ID jeszcze raz.")
