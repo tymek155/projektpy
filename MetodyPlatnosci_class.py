@@ -1,15 +1,21 @@
+from Samochod_class import Samochod
+from PlatnoscGotowka_class import PlatnoscGotowka
+from PlatnosciBankowe_class import PlatnosciBankowe
 
 class MetodyPlatnosci:
-    def __init__(self,p):
+    def __init__(self,p,metoda):
         self.prize=p
-    def zaplac(self):
+        self.metoda_platnosci=metoda
+    def zaplac(self, samochod : Samochod):
         if self.prize > 0:
-            print("Wybierz metodę płatności:\n1.Płatność bankowa\n2.Płatność gotówkom\n")
-            w=int(input("Twój wybór ->"))
-            if w==1:
-                print("Wybrano Płatności bankowe\n-----Przekierowuję na stronę banku------\n")
-            elif w==2:
+            if self.metoda_platnosci=="Gotowka":
                 print("Wybrano Płatność gotówką\n")
+                platnosc=PlatnoscGotowka(self.prize)
+                platnosc.zaplac_gotowka(samochod)
+            else:
+                print("Wybrano Płatności bankowe\n-----Przekierowuję na stronę banku------\n")
+                platnosc=PlatnosciBankowe(self.prize, self.metoda_platnosci)
+                platnosc.Bankowosc(samochod)
 
 
     

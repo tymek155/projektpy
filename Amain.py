@@ -27,6 +27,7 @@ def main():
         print("7. Dokonaj kasacji samochodu - usun samochod z bazy")
         print("8. Sprawdz termin badania technicznego")
         print("9. Wypozycz samochod")
+        print("10. Oddanie auta i zapłata")
 
         wybor = int(input())
         if wybor == 1:
@@ -62,6 +63,13 @@ def main():
             samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
             samochod = baza_aut.wybierz_auto()
             wypozyczenie.wypozycz(klient, samochod, baza_wypozyczen)
-        
+            baza_wypozyczen.dodaj_wypozyczenie_do_bazy(wypozyczenie)
+        elif wybor==10:
+            log = input("Podaj login dla ktorego chcesz zwrocic auto: ")
+            klient = Klient(None, None, None, None, None, None)
+            klient = baza_klientow.znajdz_klienta_w_bazie(log)
+            wypozyczenie = WypozyczAuto()
+            
+
 
 main()

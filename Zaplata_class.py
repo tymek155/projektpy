@@ -1,6 +1,7 @@
 from Samochod_class import Samochod
 from Klient_class import Klient
 from BazaWypozyczenia_class import BazaWypozyczenia
+from MetodyPlatnosci_class import MetodyPlatnosci
 
 class Zaplata:
     def __init__(self, wypozyczony_samochod : Samochod, uczestnik_transakcji : Klient, baza_wypozyczen: BazaWypozyczenia, ilosc_dni):
@@ -12,7 +13,7 @@ class Zaplata:
             print("Transakcja zostanie zrealizowana z obnizka dla stalego klienta")
             self.kwota = 0.9*self.kwota
 
-    def wybierz_metode_platnosci(self):
+    def wybierz_metode_platnosci(self,samochod:Samochod):
         print("Wybierz metode platnosci za wypozcyzenie: ")
         print("1. Gotowka")
         print("2. Karta platnicza")
@@ -22,7 +23,17 @@ class Zaplata:
         if (wybor != 1 and wybor != 2 and wybor != 3 and wybor != 4):
              print("Metoda platnosci podana w sposob nieprawidlowy, wybierz jeszcze raz")
              self.wybierz_metode_platnosci()
-        return wybor
+        else:
+            if wybor==1:
+                self.metoda_platnosci="Gotowka"
+            elif wybor==2:
+                self.metoda_platnosci="Karta Platnicza"
+            elif wybor==3:
+                self.metoda_platnosci="BLIK"
+            else:
+                self.metoda_platnosci="Przelew"
+        platnosc=MetodyPlatnosci(self.kwota, self.metoda_platnosci)
+        platnosc.zaplac(samochod)
 
 
 
