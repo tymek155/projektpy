@@ -3,6 +3,8 @@ from KupnoAuta_class import KupnoAuta
 from WypozyczAuto_class import WypozyczAuto
 from Klient_class import Klient
 from OperacjeAuto_class import OperacjeAuto
+from ZlozReklamacje_class import ZlozReklamacje
+from ZwrocAuto_class import ZwrocAuto
 from BazaAut_class import BazaAut
 from BazaKlientow_class import BazaKlientow
 from BazaReklmacji_class import BazaReklamacji
@@ -17,7 +19,7 @@ def main():
     baza_wypozyczen = BazaWypozyczenia()
     
     while wybor != -1:
-        print("MENY PROGRAMU")
+        print("MENU PROGRAMU")
         print("1. Kupno samochodu - dodaj samochod do bazy")
         print("2. Wyswietl samochody znajdujace sie w bazie")
         print("3. Dodaj klienta do bazy klientow")
@@ -28,6 +30,9 @@ def main():
         print("8. Sprawdz termin badania technicznego")
         print("9. Wypozycz samochod")
         print("10. Oddanie auta i zapłata")
+        print("11. Zloz reklamacje dotyczaca wypozyczenia")
+
+        print("-1. Wyjdz z programu")
 
         wybor = int(input())
         if wybor == 1:
@@ -69,6 +74,17 @@ def main():
             klient = Klient(None, None, None, None, None, None)
             klient = baza_klientow.znajdz_klienta_w_bazie(log)
             wypozyczenie = WypozyczAuto()
+            wypozyczenie = baza_wypozyczen.znajdz_wypozyczenie_w_bazie(klient.log)
+            wypozyczenie = baza_wypozyczen.wybierz_wypozyczenia(wypozyczenie)
+            zwrot_auta = ZwrocAuto() 
+            zwrot_auta.zwroc_auto(wypozyczenie.wypozyczony_samochod, klient, wypozyczenie, baza_wypozyczen)
+        elif wybor == 11:
+            zloz_reklmacje = ZlozReklamacje()
+            zloz_reklmacje.uzuplenij_info(baza_klientow, baza_wypozyczen, baza_reklamacji)
+
+
+        elif wybor == -1:
+            break
             
 
 

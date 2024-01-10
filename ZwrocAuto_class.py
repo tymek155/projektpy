@@ -8,9 +8,9 @@ from Zaplata_class import Zaplata
 
 class ZwrocAuto:
     def __init__(self):
-        self.czy_operacja_udana
+        self.czy_operacja_udana = None
 
-    def zwroc_auta(samochod : Samochod, klient : Klient, wypozyczenie : WypozyczAuto, baza_wypozyczen: BazaWypozyczenia):
+    def zwroc_auto(samochod : Samochod, klient : Klient, wypozyczenie : WypozyczAuto, baza_wypozyczen: BazaWypozyczenia):
         if (samochod.czy_dostepne_do_wypozyczenia == 0):
             samochod.czy_dostepne_do_wypozyczenia = 1
             podaj_date = input("Podaj date w formacie YYYY-MM-DD: ")

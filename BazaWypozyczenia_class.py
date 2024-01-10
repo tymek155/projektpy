@@ -23,3 +23,13 @@ class BazaWypozyczenia:
                 i = wypozyczenie
                 print("Informacje o wypozyczeniu zostaly zaktualizowane. ")
                 break
+
+    def wybierz_wypozyczenia(self, lista_wypozyczen):
+        print("Wybierz wypozyczenie nad ktorym chcesz podjac operacje: ")
+        iterator = 0
+        for i in lista_wypozyczen:
+            print("Wypozyczenie nr: ", iterator +1)
+            i.pokaz_informacje_wypozyczenie()
+        wybor_nr = int(input("\n\nPodaj numer wypozyczenia: "))
+        wybor_nr = wybor_nr - 1
+        return lista_wypozyczen[wybor_nr]

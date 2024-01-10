@@ -6,7 +6,7 @@ from Reklamacja_class import Reklamacja
 
 class ZlozReklamacje:
     def __init__(self):
-        self.czy_operacja_udana
+        self.czy_operacja_udana = None
 
     def akceptuj(self, przygotowana_reklamacja : Reklamacja, baza_reklamacji: BazaReklamacji):
         print("Informacje o skladajacym reklamacje: ")
