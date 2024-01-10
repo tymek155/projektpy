@@ -7,6 +7,7 @@ from BazaAut_class import BazaAut
 from BazaKlientow_class import BazaKlientow
 from BazaReklmacji_class import BazaReklamacji
 from BazaWypozyczenia_class import BazaWypozyczenia
+from MetodyPlatnosci_class import MetodyPlatnosci
 
 def main():
     wybor = 0
@@ -61,5 +62,6 @@ def main():
             samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
             samochod = baza_aut.wybierz_auto()
             wypozyczenie.wypozycz(klient, samochod, baza_wypozyczen)
+        
 
 main()
