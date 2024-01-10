@@ -27,12 +27,15 @@ class Klient(Osoba):
         print("\n")
 
     def dodaj_klienta_input(self):
-        self.imie = input("Podaj imie: ")
-        self.nazwisko = input("Podaj nazwisko: ")
-        self.pesel = int(input("Podaj pesel: "))
-        self.plec = input("Podaj plec: ")
-        self.login = input("Podaj indywidualny login: ")
-
+        try:
+            self.imie = input("Podaj imię: ")
+            self.nazwisko = input("Podaj nazwisko: ")
+            self.pesel = int(input("Podaj PESEL: "))
+            self.plec = input("Podaj płeć: ")
+            self.login = input("Podaj indywidualny login: ")
+        except ValueError:
+            print("Blad! Wprowadzono nieprawidlową wartosc. Upewnij sie, że podajesz liczby tam, gdzie to wymagane.")
+            return None
 
     def sprawdz_status_stalego_klienta(self, baza_wypozyczen):
         policz_ile_transakcji = 0

@@ -52,8 +52,19 @@ class BazaAut:
 
     def wybierz_auto(self):
         self.wyswietl_baze_aut()
-        wybor = int(input("Podaj numer samochodu na ktorym chcesz dokonac operacji: "))
-        wybor = wybor - 1
-        return self.samochody_w_bazie[wybor]
+        try:
+            wybor = int(input("Podaj numer samochodu na ktorym chcesz dokonac operacji: "))
+            wybor = wybor - 1
+            if 0 <= wybor < len(self.samochody_w_bazie):
+                return self.samochody_w_bazie[wybor]
+            else:
+                raise IndexError("Podano numer spoza zakresu dostepnych samochodow.")
+        except ValueError:
+            print("Blad! Podano nieprawidlową wartosc. Wprowadz numer samochodu jako liczbe calkowita.")
+            return None
+        except IndexError as e:
+            print(f"Blad! {e}")
+            return None
+
     
 

@@ -15,6 +15,9 @@ class BazaWypozyczenia:
         for i in self.historia_wypozyczen_w_bazie:
             if i.klient_ktory_wypozyczyl.login == log:
                 wynik.append(i)
+        if not wynik:
+            print("Nie znaleziono wypozyczen dla danego klienta!")
+            return None
         return wynik
     
     def wypozyczenie_aktualizacja(self, wypozyczenie : WypozyczAuto):
@@ -25,11 +28,25 @@ class BazaWypozyczenia:
                 break
 
     def wybierz_wypozyczenia(self, lista_wypozyczen):
-        print("Wybierz wypozyczenie nad ktorym chcesz podjac operacje: ")
+        print("Wybierz wypożyczenie, na którym chcesz podjąć operację: ")
         iterator = 0
+
         for i in lista_wypozyczen:
-            print("Wypozyczenie nr: ", iterator +1)
+            print("Wypożyczenie nr: ", iterator + 1)
             i.pokaz_informacje_wypozyczenie()
-        wybor_nr = int(input("\n\nPodaj numer wypozyczenia: "))
-        wybor_nr = wybor_nr - 1
-        return lista_wypozyczen[wybor_nr]
+            iterator += 1
+
+        try:
+            wybor_nr = int(input("\n\nPodaj numer wypożyczenia: "))
+            wybor_nr = wybor_nr - 1
+
+            if 0 <= wybor_nr < len(lista_wypozyczen):
+                return lista_wypozyczen[wybor_nr]
+            else:
+                raise IndexError("Podano numer spoza zakresu dostępnych wypożyczeń.")
+        except ValueError:
+            print("Blad! Podano nieprawidlowa wartosc. Wprowadz numer wypozyczenia jako liczbe calkowita.")
+            return None
+        except IndexError as a:
+            print(f"Blad! {a}")
+            return None

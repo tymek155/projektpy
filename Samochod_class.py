@@ -16,22 +16,36 @@ class Samochod:
         self.oplata_dzienna = opltd
 
     def stworz_auto_input(self):
-        self.rocznik = int(input("Podaj rok produkcji samochodu: "))
-        self.marka = input("Podaj marke: ")
-        self.przbieg = int(input("Podaj przebieg: "))
-        self.stan = int(input("Podaj 1 jesli stan jest dobyr lub 0 jesli stan samochodu jest zly: "))
-        self.ilosc_siedzen = int(input("Podaj ilosc siedzen: "))
-        self.skrzynia_biegow = input("Podaj czy skrzynia biegow jest automatyczna czy manualna - A lub M: ")
-        self.pojemnosc_bagaznika = int(input("Podaj pojemnosc bagaznika: "))
-        self.rodzaj = input("Podaj rodzaj samochodu: ")
-        self.adnotacja_naprawa = ""
-        self.czy_dostepne_do_wypozyczenia = 1
-        self.oplata_dzienna = int(input("Podaj oplate dzienna za wypozyczenie samochodu: "))
-        data_podaj = input("Podaj date badania technicznego w formacie YYYY-MM-DD: ")
         try:
-            self.data_badania_technicznego = datetime.strptime(data_podaj, "%Y-%m-%d")
+            self.rocznik = int(input("Podaj rok produkcji samochodu: "))
+            self.przebieg = int(input("Podaj przebieg: "))
+            self.stan = int(input("Podaj 1 jesli stan jest dobry lub 0 jesli stan samochodu jest zly: "))
+            self.ilosc_siedzen = int(input("Podaj ilość siedzen: "))
+            self.pojemnosc_bagaznika = int(input("Podaj pojemność bagaznika: "))
+            self.oplata_dzienna = int(input("Podaj oplate dzienną za wypozyczenie samochodu: "))
+            
+            skrzynia_biegow_input = input("Podaj czy skrzynia biegow jest automatyczna czy manualna - A lub M: ")
+            if skrzynia_biegow_input.upper() in {'A', 'M'}:
+                self.skrzynia_biegow = skrzynia_biegow_input.upper()
+            else:
+                print("Blad! Wybierz A lub M dla skrzyni biegow.")
+                return None
+
+            data_badania_technicznego_input = input("Podaj date badania technicznego w formacie YYYY-MM-DD: ")
+            self.data_badania_technicznego = datetime.strptime(data_badania_technicznego_input, "%Y-%m-%d")
+
+            self.marka = input("Podaj marke: ")
+            self.rodzaj = input("Podaj rodzaj samochodu: ")
+
+            self.adnotacja_naprawa = ""
+            self.czy_dostepne_do_wypozyczenia = 1
+
         except ValueError:
-            print("Błąd! Nieprawidłowy format daty.")
+            print("Blad! Wprowadzono nieprawidlowa wartosc. Upewnij sie, że podajesz liczby tam, gdzie to wymagane.")
+            return None
+        except Exception as e:
+            print(f"Wystapil blad: {e}")
+            return None
 
 
     def podaj_info_do_dok_wypozyczenia(self):

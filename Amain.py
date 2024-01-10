@@ -38,6 +38,9 @@ def main():
         if wybor == 1:
             zakup = KupnoAuta()
             samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
+            if samochod == None:
+                print("Blad operacji!")
+                continue
             samochod.stworz_auto_input()
             zakup.kupno(samochod, baza_aut)
         elif wybor == 2:
@@ -45,6 +48,9 @@ def main():
         elif wybor == 3:
             klient = Klient(None, None, None, None, None, None)
             klient.dodaj_klienta_input()
+            if klient == None:
+                print("Blad operacji!")
+                continue
             baza_klientow.dodaj_klienta_do_bazy(klient)
         elif wybor == 4:
             baza_klientow.wyswietl_baze_klientow()
@@ -65,8 +71,14 @@ def main():
             klient = Klient(None, None, None, None, None, None)
             log = input("Podaj login dla ktorego chcesz dokonac wypozyczenia: ")
             klient = baza_klientow.znajdz_klienta_w_bazie(log)
+            if (klient == None):
+                print("Blad wprowadzenia loginu klienta!")
+                continue
             samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
             samochod = baza_aut.wybierz_auto()
+            if samochod == None:
+                print("Blad operacji!")
+                continue
             wypozyczenie.wypozycz(klient, samochod, baza_wypozyczen)
             baza_wypozyczen.dodaj_wypozyczenie_do_bazy(wypozyczenie)
         elif wybor==10:
@@ -75,9 +87,14 @@ def main():
             klient = baza_klientow.znajdz_klienta_w_bazie(log)
             wypozyczenie = WypozyczAuto()
             wypozyczenie = baza_wypozyczen.znajdz_wypozyczenie_w_bazie(klient.login)
+            if (wypozyczenie == None):
+                print("Blad operacji")
+                continue
             wypozyczenie = baza_wypozyczen.wybierz_wypozyczenia(wypozyczenie)
+            if (wypozyczenie == None):
+                print("Blad operacji")
+                continue
             zwrot_auta = ZwrocAuto() 
-            #zwrot_auta.zwroc_auto(wypozyczenie.wypozyczony_samochod, klient, wypozyczenie, baza_wypozyczen)
             zwrot_auta.zwroc_auto(wypozyczenie.wypozyczony_samochod, klient, wypozyczenie, baza_wypozyczen)
         elif wybor == 11:
             zloz_reklmacje = ZlozReklamacje()

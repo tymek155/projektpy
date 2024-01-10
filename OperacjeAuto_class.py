@@ -37,16 +37,17 @@ class OperacjeAuto:
 
     def badanie_techniczne(self, samochod: Samochod, baza_aut : BazaAut):
         sprawdzam_stan_samochodu = []
-
-        print("PODAJ 1 JESLI DOBRY, PODAJ 0 JESLI ZLY")
-        sprawdzam_stan_samochodu.append(int(input("Czy stan oswietelenia jest dobry?  ")))
-        sprawdzam_stan_samochodu.append(int(input("Czy stan hamulcow jest dobry?  ")))
-        sprawdzam_stan_samochodu.append(int(input("Czy stan zawieszenia jest dobry?  ")))
-        sprawdzam_stan_samochodu.append(int(input("Czy stan silnika jest dobry?  ")))
-        sprawdzam_stan_samochodu.append(int(input("Czy stan ukladu kierwoniczego jest dobry?  ")))
-        sprawdzam_stan_samochodu.append(int(input("Czy stan karoserii jest dobry?  ")))
-        sprawdzam_stan_samochodu.append(int(input("Czy stan podwozia jest dobry?  ")))
-
+        try:
+            print("PODAJ 1 JESLI DOBRY, PODAJ 0 JESLI ZLY")
+            sprawdzam_stan_samochodu.append(int(input("Czy stan oswietelenia jest dobry?  ")))
+            sprawdzam_stan_samochodu.append(int(input("Czy stan hamulcow jest dobry?  ")))
+            sprawdzam_stan_samochodu.append(int(input("Czy stan zawieszenia jest dobry?  ")))
+            sprawdzam_stan_samochodu.append(int(input("Czy stan silnika jest dobry?  ")))
+            sprawdzam_stan_samochodu.append(int(input("Czy stan ukladu kierwoniczego jest dobry?  ")))
+            sprawdzam_stan_samochodu.append(int(input("Czy stan karoserii jest dobry?  ")))
+            sprawdzam_stan_samochodu.append(int(input("Czy stan podwozia jest dobry?  ")))
+        except ValueError:
+            print("Blad, wprowadzono wartosc inna niz liczbowa")
         for i in sprawdzam_stan_samochodu:
             if i == 0:
                 print("Samochod wymaga naprawy, przejscie do procesu naprawy samochodu.")
