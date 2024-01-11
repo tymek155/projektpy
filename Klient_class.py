@@ -7,6 +7,7 @@ class Klient(Osoba):
         super().__init__(im, nazw, pes, pl)
         self.login = log
         self.status_stalego_klienta = status
+        self.sprawdz_czy_none = "Brak"
 
     def jakie_auto(autoa : Samochod):
         print("Podaj dane auta: ")
@@ -35,6 +36,7 @@ class Klient(Osoba):
             self.login = input("Podaj indywidualny login: ")
         except ValueError:
             print("Blad! Wprowadzono nieprawidlową wartosc. Upewnij sie, że podajesz liczby tam, gdzie to wymagane.")
+            self.sprawdz_czy_none = None
             return None
 
     def sprawdz_status_stalego_klienta(self, baza_wypozyczen):

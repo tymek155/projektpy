@@ -42,14 +42,34 @@ class ZlozReklamacje:
             print("Brak wypozyczen dla tego klienta.")
             return
 
-        print("Historia wypozyczen klienta: ")
+        print("\nHistoria wypozyczen klienta: ")
         for i in historia_wypozyczen:
-            i.pokaz_informacje_wypozyczenie()
+            sprawdz_czy_zostalo_wyswietlone = 0
+            if i.data_oddania != "Brak":
+                i.pokaz_informacje_wypozyczenie()
+                print("\n")
+                sprawdz_czy_zostalo_wyswietlone = 1
+
+        if sprawdz_czy_zostalo_wyswietlone == 0:
+            print("Brak wypozyczen do zareklamowania.")
+            return None
 
         while True:
             try:
                 id_wypozyczenia = int(input("Podaj ID wypozyczenia, ktorej ma dotyczyc reklamacja: "))
-                wypozyczenie = next((i for i in historia_wypozyczen if i.id_wypozyczenia == id_wypozyczenia), None)
+                wypozyczenie = None
+                for i in historia_wypozyczen:
+                    if i.id_wypozyczenia == id_wypozyczenia:
+                        wypozyczenie = i
+                
+                if wypozyczenie == None:
+                    print("Brak wypozyczenia o podanym ID!")
+                    return None
+
+                if wypozyczenie.data_oddania == "Brak":
+                    print("Wybrano wypozyczenie, ktore nie zostalo jeszcze zrealizowane.")
+                    print("Blad operacji!")   
+                    return None
 
                 if wypozyczenie:
                     nowa_reklamacja.wypozyczenie_reklamowane = wypozyczenie

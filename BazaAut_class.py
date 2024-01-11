@@ -44,8 +44,9 @@ class BazaAut:
 
     def wyswietl_baze_aut(self):
         licznik = 0
+        print("\n")
         for i in self.samochody_w_bazie:
-            print("Samochod nr: ", licznik+1)
+            print("\nSamochod nr: ", licznik+1)
             i.podaje_cale_info_samochod()
             print("\n")
             licznik = licznik + 1

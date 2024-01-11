@@ -19,7 +19,7 @@ def main():
     baza_wypozyczen = BazaWypozyczenia()
     
     while wybor != -1:
-        print("MENU PROGRAMU")
+        print("\nMENU PROGRAMU")
         print("1. Kupno samochodu - dodaj samochod do bazy")
         print("2. Wyswietl samochody znajdujace sie w bazie")
         print("3. Dodaj klienta do bazy klientow")
@@ -38,8 +38,8 @@ def main():
         if wybor == 1:
             zakup = KupnoAuta()
             samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
-            wynik = samochod.stworz_auto_input(samochod)
-            if wynik == None:
+            samochod.stworz_auto_input()
+            if samochod.sprawdz_none == None:
                 print("Blad operacji!")
                 continue
             zakup.kupno(samochod, baza_aut)
@@ -47,8 +47,8 @@ def main():
             baza_aut.wyswietl_baze_aut()
         elif wybor == 3:
             klient = Klient(None, None, None, None, None, None)
-            sprawdz_czy_none = klient.dodaj_klienta_input()
-            if sprawdz_czy_none == None:
+            klient.dodaj_klienta_input()
+            if klient.sprawdz_czy_none == None:
                 print("Blad operacji!")
                 continue
             baza_klientow.dodaj_klienta_do_bazy(klient)
@@ -57,11 +57,11 @@ def main():
         elif wybor == 5:
             operacja_badanie = OperacjeAuto()
             samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
-            sprawdz_czy_none = baza_aut.wybierz_auto()
-            if sprawdz_czy_none == None:
+            samochod = baza_aut.wybierz_auto()
+            if samochod == None:
                 print("Blad operacji!")
                 continue
-            samochod = sprawdz_czy_none
+            #samochod = sprawdz_czy_none
             operacja_badanie.badanie_techniczne(samochod, baza_aut)
         elif wybor == 6:
             operacja_naprawa = OperacjeAuto()
@@ -106,6 +106,9 @@ def main():
             log = input("Podaj login dla ktorego chcesz zwrocic auto: ")
             klient = Klient(None, None, None, None, None, None)
             klient = baza_klientow.znajdz_klienta_w_bazie(log)
+            if (klient == None):
+                print("Blad wprowadzenia loginu klienta!")
+                continue
             wypozyczenie = WypozyczAuto()
             wypozyczenie = baza_wypozyczen.znajdz_wypozyczenie_w_bazie(klient.login)
             if (wypozyczenie == None):

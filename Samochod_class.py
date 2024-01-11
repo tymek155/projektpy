@@ -14,6 +14,7 @@ class Samochod:
         self.adnotacja_naprawa = adn
         self.czy_dostepne_do_wypozyczenia = czyd
         self.oplata_dzienna = opltd
+        self.sprawdz_none = "Brak"
 
     def stworz_auto_input(self):
         try:
@@ -29,6 +30,7 @@ class Samochod:
                 self.skrzynia_biegow = skrzynia_biegow_input.upper()
             else:
                 print("Blad! Wybierz A lub M dla skrzyni biegow.")
+                self.sprawdz_none = None
                 return None
 
             data_badania_technicznego_input = input("Podaj date badania technicznego w formacie YYYY-MM-DD: ")
@@ -42,9 +44,11 @@ class Samochod:
 
         except ValueError:
             print("Blad! Wprowadzono nieprawidlowa wartosc. Upewnij sie, że podajesz liczby tam, gdzie to wymagane.")
+            self.sprawdz_none = None
             return None
         except Exception as e:
             print(f"Wystapil blad: {e}")
+            self.sprawdz_none = None
             return None
 
 

@@ -8,39 +8,44 @@ class OperacjeAuto:
         self.czy_kasacja_wykonana = None
 
     def kasacja(self, samochod : Samochod, baza_aut : BazaAut):
-        if self.czy_kasacja_wykonana == 1:
-            print("Usuwam samochod z bazy samochodow")
-            baza_aut.usun_samochod(samochod)
+        print("Usuwam samochod z bazy samochodow.")
+        baza_aut.usun_samochod(samochod)
+        print("Samochod zostal usniety pomyslnie!")
 
     def naprawa_auta(self, samochod : Samochod, baza_aut : BazaAut):
-        decyzja_naprawy = int(input("Czy naprawa samochodu jest mozliwa? Podaj 1 jesli TAK, 0 jesli NIE" ))
-        while (decyzja_naprawy == 0):
-            decyzja_ostateczna = int(input("Czy chcesz usunac auto z bazy i przekazac jes do kasacji? Podaj 1 jesli TAK, 0 jesli NIE "))
-            if decyzja_ostateczna == 1:
-                print("Auto zostaje przekazane do kasacji i trwale usuniete z bazy")
-                self.czy_kasacja_wykonana = 1
-                self.kasacja(samochod, baza_aut)
-                break
-            else:
-                print("Powrot do procesu naprawy auta")
+        try:
+            decyzja_naprawy = int(input("Czy naprawa samochodu jest mozliwa? Podaj 1 jesli TAK, 0 jesli NIE: " ))
+            while (decyzja_naprawy == 0):
+                decyzja_ostateczna = int(input("Czy chcesz usunac auto z bazy i przekazac jes do kasacji? Podaj 1 jesli TAK, 0 jesli NIE: "))
+                if decyzja_ostateczna == 1:
+                    print("Auto zostaje przekazane do kasacji i trwale usuniete z bazy.")
+                    self.czy_kasacja_wykonana = 1
+                    self.kasacja(samochod, baza_aut)
+                    break
+                else:
+                    print("Powrot do procesu naprawy auta")
+                    try:
+                        decyzja_naprawy = int(input("Czy naprawa samochodu jest mozliwa? Podaj 1 jesli TAK, 0 jesli NIE: "))
+                        if decyzja_naprawy != 0 and decyzja_naprawy != 1:
+                            print("Podano nieprawidlowy numer!")
+                            return None
+                    except ValueError:
+                        print("Blad, nie podano wartosci liczbowej!")
+            if decyzja_naprawy == 1:
+                notatka = input("Opisz naprawe, wymienione czesci oraz koszt naprawy samochodu: ")
+                samochod.adnotacja_naprawa = samochod.adnotacja_naprawa + notatka
+                self.czy_naprawa_udana = 1
+                podaj_date = input("Podaj datę nastepnego badania technicznego w formacie YYYY-MM-DD: ")
                 try:
-                    decyzja_naprawy = int(input("Czy naprawa samochodu jest mozliwa? Podaj 1 jesli TAK, 0 jesli NIE"))
-                    if decyzja_naprawy != 0 and decyzja_naprawy != 1:
-                        print("Podano nieprawidlowy numer!")
-                        return None
+                    samochod.data_badania_technicznego = datetime.strptime(podaj_date, "%Y-%m-%d")
+                    print("Data nastepnego badania technicznego:", samochod.data_badania_technicznego)    
                 except ValueError:
-                    print("Blad, nie podano wartosci liczbowej!")
-        if decyzja_naprawy == 1:
-            notatka = input("Opisz naprawe, wymienione czesci oraz koszt naprawy samochodu: ")
-            samochod.adnotacja_naprawa = samochod.adnotacja_naprawa + notatka
-            self.czy_naprawa_udana = 1
-            podaj_date = input("Podaj datę nastepnego badania technicznego w formacie YYYY-MM-DD: ")
-            try:
-                samochod.data_badania_technicznego = datetime.strptime(podaj_date, "%Y-%m-%d")
-                print("Data nastepnego badania technicznego:", samochod.data_badania_technicznego)    
-            except ValueError:
-                print("Blad! Nieprawidlowy format daty.")
-                return None
+                    print("Blad! Nieprawidlowy format daty.")
+                    return None
+        except ValueError:
+            print("Blad, nie podano wartosci liczbowej!")
+            return None
+
 
     def badanie_techniczne(self, samochod: Samochod, baza_aut : BazaAut):
         sprawdzam_stan_samochodu = []
@@ -54,7 +59,7 @@ class OperacjeAuto:
             sprawdzam_stan_samochodu.append(int(input("Czy stan karoserii jest dobry?  ")))
             sprawdzam_stan_samochodu.append(int(input("Czy stan podwozia jest dobry?  ")))
         except ValueError:
-            print("Blad, wprowadzono wartosc inna niz liczbowa")
+            print("Blad, wprowadzono wartosc inna niz liczbowa.")
             return None
         for i in sprawdzam_stan_samochodu:
             if i == 0:
