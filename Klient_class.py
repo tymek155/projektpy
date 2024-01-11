@@ -9,7 +9,7 @@ class Klient(Osoba):
         self.status_stalego_klienta = status
         self.sprawdz_czy_none = "Brak"
 
-    def jakie_auto(autoa : Samochod):
+    def jakie_auto(autoa : Samochod):#
         print("Podaj dane auta: ")
         m = input("Podaj marke: ")
         rok = int(input("Podaj rok: "))
@@ -27,7 +27,7 @@ class Klient(Osoba):
         print("Login: ", self.login)
         print("\n")
 
-    def dodaj_klienta_input(self):
+    def dodaj_klienta_input(self):#
         try:
             self.imie = input("Podaj imię: ")
             self.nazwisko = input("Podaj nazwisko: ")

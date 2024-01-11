@@ -10,7 +10,7 @@ class BazaKlientow:
         self.klienci_w_bazie.add(klient)
         BazaKlientow.ilosc_klientow_w_bazie += 1
 
-    def znajdz_klienta_w_bazie(self, log):
+    def znajdz_klienta_w_bazie(self, log):#
         for i in self.klienci_w_bazie:
             if i.login == log:
                 return i

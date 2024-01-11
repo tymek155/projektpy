@@ -1,7 +1,5 @@
 from Samochod_class import Samochod
 
-
-
 class MetodyPlatnosci:
     def __init__(self,p,metoda):
         self.prize=p

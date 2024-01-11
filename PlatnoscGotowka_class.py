@@ -1,5 +1,6 @@
 from MetodyPlatnosci_class import MetodyPlatnosci
 from Samochod_class import Samochod
+
 class PlatnoscGotowka(MetodyPlatnosci):
     def __init__(self, p, metoda):
         super().__init__(p, metoda)
