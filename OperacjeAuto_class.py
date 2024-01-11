@@ -23,7 +23,13 @@ class OperacjeAuto:
                 break
             else:
                 print("Powrot do procesu naprawy auta")
-                decyzja_naprawy = int(input("Czy naprawa samochodu jest mozliwa? Podaj 1 jesli TAK, 0 jesli NIE"))
+                try:
+                    decyzja_naprawy = int(input("Czy naprawa samochodu jest mozliwa? Podaj 1 jesli TAK, 0 jesli NIE"))
+                    if decyzja_naprawy != 0 and decyzja_naprawy != 1:
+                        print("Podano nieprawidlowy numer!")
+                        return None
+                except ValueError:
+                    print("Blad, nie podano wartosci liczbowej!")
         if decyzja_naprawy == 1:
             notatka = input("Opisz naprawe, wymienione czesci oraz koszt naprawy samochodu: ")
             samochod.adnotacja_naprawa = samochod.adnotacja_naprawa + notatka
@@ -34,6 +40,7 @@ class OperacjeAuto:
                 print("Data nastepnego badania technicznego:", samochod.data_badania_technicznego)    
             except ValueError:
                 print("Blad! Nieprawidlowy format daty.")
+                return None
 
     def badanie_techniczne(self, samochod: Samochod, baza_aut : BazaAut):
         sprawdzam_stan_samochodu = []
@@ -48,13 +55,14 @@ class OperacjeAuto:
             sprawdzam_stan_samochodu.append(int(input("Czy stan podwozia jest dobry?  ")))
         except ValueError:
             print("Blad, wprowadzono wartosc inna niz liczbowa")
+            return None
         for i in sprawdzam_stan_samochodu:
             if i == 0:
                 print("Samochod wymaga naprawy, przejscie do procesu naprawy samochodu.")
                 self.naprawa_auta(samochod, baza_aut)
                 break
         print("Pozytywny wynik badania technicznego!")
-        podaj_date = input("Podaj datę nastepnego badania technicznego w formacie YYYY-MM-DD: ")
+        podaj_date = input("Podaj date nastepnego badania technicznego w formacie YYYY-MM-DD: ")
         try:
             samochod.data_badania_technicznego = datetime.strptime(podaj_date, "%Y-%m-%d")
             print("Data nastepnego badania technicznego: ", samochod.data_badania_technicznego)    

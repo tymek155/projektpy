@@ -58,7 +58,8 @@ class BazaAut:
             if 0 <= wybor < len(self.samochody_w_bazie):
                 return self.samochody_w_bazie[wybor]
             else:
-                raise IndexError("Podano numer spoza zakresu dostepnych samochodow.")
+                print("Podano numer spoza zakresu dostepnych samochodow.")
+                return None
         except ValueError:
             print("Blad! Podano nieprawidlową wartosc. Wprowadz numer samochodu jako liczbe calkowita.")
             return None

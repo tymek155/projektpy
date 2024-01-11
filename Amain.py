@@ -38,17 +38,17 @@ def main():
         if wybor == 1:
             zakup = KupnoAuta()
             samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
-            if samochod == None:
+            wynik = samochod.stworz_auto_input(samochod)
+            if wynik == None:
                 print("Blad operacji!")
                 continue
-            samochod.stworz_auto_input()
             zakup.kupno(samochod, baza_aut)
         elif wybor == 2:
             baza_aut.wyswietl_baze_aut()
         elif wybor == 3:
             klient = Klient(None, None, None, None, None, None)
-            klient.dodaj_klienta_input()
-            if klient == None:
+            sprawdz_czy_none = klient.dodaj_klienta_input()
+            if sprawdz_czy_none == None:
                 print("Blad operacji!")
                 continue
             baza_klientow.dodaj_klienta_do_bazy(klient)
@@ -56,16 +56,37 @@ def main():
             baza_klientow.wyswietl_baze_klientow()
         elif wybor == 5:
             operacja_badanie = OperacjeAuto()
-            operacja_badanie.badanie_techniczne(baza_aut.wybierz_auto(), baza_aut)
+            samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
+            sprawdz_czy_none = baza_aut.wybierz_auto()
+            if sprawdz_czy_none == None:
+                print("Blad operacji!")
+                continue
+            samochod = sprawdz_czy_none
+            operacja_badanie.badanie_techniczne(samochod, baza_aut)
         elif wybor == 6:
             operacja_naprawa = OperacjeAuto()
-            operacja_naprawa.naprawa_auta(baza_aut.wybierz_auto(), baza_aut)
+            samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
+            samochod = baza_aut.wybierz_auto()
+            if samochod == None:
+                print("Blad operacji!")
+                continue
+            operacja_naprawa.naprawa_auta(samochod, baza_aut)
         elif wybor == 7:
             operacja_kasacja = OperacjeAuto()
-            operacja_kasacja.kasacja(baza_aut.wybierz_auto(), baza_aut)
+            samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
+            samochod = baza_aut.wybierz_auto()
+            if samochod == None:
+                print("Blad operacji!")
+                continue
+            operacja_kasacja.kasacja(samochod, baza_aut)
         elif wybor == 8:
             operacja_sprawdz_termin_badania = OperacjeAuto()
-            operacja_sprawdz_termin_badania.sprawdz_termin_badania_technicznego(baza_aut.wybierz_auto())
+            samochod = Samochod(None, None, None, None, None, None, None, None, None, None, None, None)
+            samochod = baza_aut.wybierz_auto()
+            if samochod == None:
+                print("Blad operacji!")
+                continue
+            operacja_sprawdz_termin_badania.sprawdz_termin_badania_technicznego(samochod)
         elif wybor == 9:
             wypozyczenie = WypozyczAuto()
             klient = Klient(None, None, None, None, None, None)
