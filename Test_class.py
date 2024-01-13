@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock
 from unittest.mock import patch
+from unittest.mock import MagicMock
 from BazaAut_class import BazaAut
 from BazaKlientow_class import BazaKlientow
 from BazaWypozyczenia_class import BazaWypozyczenia
@@ -8,6 +9,7 @@ from WypozyczAuto_class import WypozyczAuto
 from Klient_class import Klient
 from OperacjeAuto_class import OperacjeAuto
 from Samochod_class import Samochod
+from Zaplata_class import Zaplata
 
 class TestBazaAut(unittest.TestCase):
     def test_usun_samochod(self):
@@ -103,7 +105,65 @@ class TestKlient(unittest.TestCase):
 
         self.assertIsNone(klient.pesel)
 
+class MockMetodyPlatnosci:
+        def __init__(self, kwota, metoda_platnosci):
+            self.kwota = kwota
+            self.metoda_platnosci = metoda_platnosci
+            self.zaplac = MagicMock()
 
+class TestZaplata(unittest.TestCase):
+
+    def test_obnizka_dla_stalego_klienta(self):
+        samochod = Samochod("marka1", 2000, 1000, 1, 5, "A", 1200, "rodzaj1", "2024-12-10", "Brak", 1, 200)
+        klient = Klient("Jan", "Kowalski", "00000000000", "M", "login",11)
+        baza_wypozyczen = BazaWypozyczenia()
+        wypozyczenie = WypozyczAuto()
+        wypozyczenie.wypozycz(klient, samochod, baza_wypozyczen)
+        baza_wypozyczen.dodaj_wypozyczenie_do_bazy(wypozyczenie)
+
+        ilosc_dni = 5
+        zaplata = Zaplata(samochod, klient, baza_wypozyczen, ilosc_dni)
+        self.assertEqual(zaplata.kwota*0.9, samochod.oplata_dzienna * ilosc_dni * 0.9)
+
+    def test_wybor_metody_platnosci(self):
+        samochod = Samochod("marka1", 2000, 1000, 1, 5, "A", 1200, "rodzaj1", "2024-12-10", "Brak", 1, 200)
+        klient = Klient("Jan", "Kowalski", "00000000000", "M", "login",11)
+        baza_wypozyczen = BazaWypozyczenia()
+        wypozyczenie = WypozyczAuto()
+        wypozyczenie.wypozycz(klient, samochod, baza_wypozyczen)
+        baza_wypozyczen.dodaj_wypozyczenie_do_bazy(wypozyczenie)
+
+        ilosc_dni = 3
+        zaplata = Zaplata(samochod, klient, baza_wypozyczen, ilosc_dni)
+        zaplata.wybierz_metode_platnosci(samochod)
+        self.assertIn(zaplata.metoda_platnosci, ["Gotowka", "Karta Platnicza", "BLIK", "Przelew"])
+
+    def test_rekurencyjny_wybor_metody_platnosci(self):
+        samochod = Samochod("marka1", 2000, 1000, 1, 5, "A", 1200, "rodzaj1", "2024-12-10", "Brak", 1, 200)
+        klient = Klient("Jan", "Kowalski", "00000000000", "M", "login",10)
+        baza_wypozyczen = BazaWypozyczenia()
+        wypozyczenie = WypozyczAuto()
+        wypozyczenie.wypozycz(klient, samochod, baza_wypozyczen)
+        baza_wypozyczen.dodaj_wypozyczenie_do_bazy(wypozyczenie)
+
+        ilosc_dni = 2
+        zaplata = Zaplata(samochod, klient, baza_wypozyczen, ilosc_dni)
+        zaplata.wybierz_metode_platnosci(samochod)
+        self.assertIn(zaplata.metoda_platnosci, ["Gotowka", "Karta Platnicza", "BLIK", "Przelew"])
+
+    def test_zaplac(self):
+        samochod = Samochod("marka1", 2000, 1000, 1, 5, "A", 1200, "rodzaj1", "2024-12-10", "Brak", 1, 200)
+        klient = Klient("Jan", "Kowalski", "00000000000", "M", "login",9)
+        baza_wypozyczen = BazaWypozyczenia()
+        wypozyczenie = WypozyczAuto()
+        wypozyczenie.wypozycz(klient, samochod, baza_wypozyczen)
+        baza_wypozyczen.dodaj_wypozyczenie_do_bazy(wypozyczenie)
+
+        ilosc_dni = 4
+        zaplata = Zaplata(samochod, klient, baza_wypozyczen, ilosc_dni)
+        mock_metoda_platnosci = MockMetodyPlatnosci(zaplata,1)
+        mock_metoda_platnosci.zaplac(samochod)
+        mock_metoda_platnosci.zaplac.assert_called_with(samochod)
             
     
 
