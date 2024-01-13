@@ -10,7 +10,7 @@ class BazaWypozyczenia:
         self.historia_wypozyczen_w_bazie.append(wypozyczenie)
         BazaWypozyczenia.stan_ilosciowy_historii += 1
 
-    def znajdz_wypozyczenie_w_bazie(self, log):#
+    def znajdz_wypozyczenie_w_bazie(self, log):
         wynik = []
         for i in self.historia_wypozyczen_w_bazie:
             if i.klient_ktory_wypozyczyl.login == log:

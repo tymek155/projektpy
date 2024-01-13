@@ -9,15 +9,19 @@ class Klient(Osoba):
         self.status_stalego_klienta = status
         self.sprawdz_czy_none = "Brak"
 
-    def jakie_auto(autoa : Samochod):#
+    def jakie_auto(autoa : Samochod):
         print("Podaj dane auta: ")
         m = input("Podaj marke: ")
-        rok = int(input("Podaj rok: "))
-        przeb = int(input("Podaj przebieg: "))
-        il_s = int(input("Podaj ilosc siedzen: "))
+        try: 
+            rok = int(input("Podaj rok: "))
+            przeb = int(input("Podaj przebieg: "))
+            il_s = int(input("Podaj ilosc siedzen: "))
+        except ValueError:
+            print("Podano nieprawidlowa wartosc - nieliczbowa!")
+            return None
         rskrz = input("Podaj rodzaj skryzni biegow: ")
 
-        return Samochod(m, rok, przeb, True, il_s, rskrz, 10, "coupe, 0")
+        return Samochod(m, rok, przeb, True, il_s, rskrz, 10, "coupe", 0)
     
     def wyswietl_informacje_o_kliencie(self):
         print("Imie: ", self.imie)
@@ -27,7 +31,7 @@ class Klient(Osoba):
         print("Login: ", self.login)
         print("\n")
 
-    def dodaj_klienta_input(self):#
+    def dodaj_klienta_input(self):
         try:
             self.imie = input("Podaj imię: ")
             self.nazwisko = input("Podaj nazwisko: ")
